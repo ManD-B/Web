@@ -47,10 +47,6 @@
                         <a class="nav-link {% if menu.stmt %}active{% endif %}" 
                         href="{% if menu.stmt %}#{% else %}/sentiment{% endif %}">감성분석</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link {% if menu.clsf %}active{% endif %}" 
-                        href="{% if menu.clsf %}#{% else %}/classification{% endif %}">분류</a>
-                    </li> -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {% if menu.clsf %}active{% endif %}" 
                            data-toggle="dropdown" href="#">분류</a>
@@ -64,11 +60,11 @@
                         href="{% if menu.clst %}#{% else %}/clustering{% endif %}">군집화</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">팀 멤버</a>
+                        <a class="nav-link dropdown-toggle {% if menu.user %}active{% endif %}" data-toggle="dropdown" href="#">팀 멤버</a>
                         <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">김태균</a>
-                        <a class="dropdown-item" href="#">이용규</a>
-                        <a class="dropdown-item" href="#">김민우</a>
+                        <a class="dropdown-item" href="/member/임현석?nickname=최강 동안미모">임현석</a>
+                        <a class="dropdown-item" href="/member/임해찬?nickname=빵만두">임해찬</a>
+                        <a class="dropdown-item" href="/member/신건찬?nickname=ㅇ">신건찬</a>
                         </div>
                     </li>
                 </ul>
@@ -84,7 +80,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center fixed-bottom">
         <span class="navbar-text">
-            Copyright &copy; 2020 AI Innovator
+            Copyright &copy; 2020 AI NTO
         </span>
     </nav>
     {% block addition %}

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 import os
 import joblib
 import numpy as np
@@ -10,6 +10,7 @@ from konlpy.tag import Okt
 from tensorflow import keras
 from keras.models import load_model
 from keras.applications.vgg16 import VGG16, decode_predictions
+from clu_util import cluster_util
 
 app = Flask(__name__)
 app.debug = True
@@ -135,12 +136,31 @@ def classification_iris():
                 'species_dt':species_dt, 'species_deep':species_deep}
         return render_template('cla_iris_result.html', menu=menu, iris=iris)
 
-@app.route('/clustering')
+@app.route('/clustering', methods=['GET', 'POST'])
 def clustering():
-    pass
+    menu = {'home':False, 'rgrs':False, 'stmt':False, 'clsf':False, 'clst':True, 'user':False}
+    if request.method == 'GET':
+        return render_template('clustering.html', menu=menu)
+    else:
+        f = request.files['csv']
+        filename = os.path.join(app.root_path, 'static/images/uploads/') + \
+                    secure_filename(f.filename)
+        f.save(filename)
+        ncls = int(request.form['K'])
+        cluster_util(app, ncls, secure_filename(f.filename))
+        img_file = os.path.join(app.root_path, 'static/images/kmc.png')
+        mtime = int(os.stat(img_file).st_mtime)
+        return render_template('clu_result.html', menu=menu, K=ncls, mtime=mtime)
+
+
+@app.route('/member/<name>')
+def member(name):
+    menu = {'home':False, 'rgrs':False, 'stmt':False, 'clsf':False, 'clst':False, 'user':True}
+    nickname = request.args.get('nickname', '별명: 없음')
+    return render_template('user.html', menu=menu, name=name, nickname=nickname)
 
 if __name__ == '__main__':
     load_movie_lr()
     load_movie_nb()
     load_iris()
-    app.run()
+    app.run(host='0.0.0.0')     # 외부 접속 허용시 host='0.0.0.0' 추가
