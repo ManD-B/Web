@@ -14,8 +14,8 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <!-- Brand/logo -->
-        <a class="navbar-brand" style="margin-left:50px;margin-right:100px;" href="#">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" style="height:45px;">
+        <a class="navbar-brand" style="margin-left:50px;margin-right:750px;" href="#">
+            <img src="{{ url_for('static', filename='images/NTO1.gif') }}" alt="Logo" style="height:45px;">
         </a>
 
         <!-- Links -->
@@ -49,22 +49,27 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {% if menu.clsf %}active{% endif %}" 
-                           data-toggle="dropdown" href="#">분류</a>
+                        data-toggle="dropdown" href="#">분류</a>
                         <div class="dropdown-menu">
                         <a class="dropdown-item" href="/classification_iris">아이리스 분류</a>
+                        <a class="dropdown-item" href="/classification_diabetes">당뇨병 분류</a>
+                        <a class="dropdown-item" href="/classification_cnn">개 VS 고양이</a>
+                        <a class="dropdown-item" href="/face">동물상 테스트</a>
                         <a class="dropdown-item" href="/classification">이미지 분류</a>
+                        
                         </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if menu.clst %}active{% endif %}" 
                         href="{% if menu.clst %}#{% else %}/clustering{% endif %}">군집화</a>
                     </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {% if menu.user %}active{% endif %}" data-toggle="dropdown" href="#">팀 멤버</a>
                         <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/member/임현석?nickname=최강 동안미모">임현석</a>
-                        <a class="dropdown-item" href="/member/임해찬?nickname=빵만두">임해찬</a>
-                        <a class="dropdown-item" href="/member/신건찬?nickname=ㅇ">신건찬</a>
+                        <a class="dropdown-item" href="/member/임현석">임현석</a>
+                        <a class="dropdown-item" href="/member/임해찬">임해찬</a>
+                        <a class="dropdown-item" href="/member/신건찬">신건찬</a>
                         </div>
                     </li>
                 </ul>
@@ -80,7 +85,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center fixed-bottom">
         <span class="navbar-text">
-            Copyright &copy; 2020 AI NTO
+            Copyright &copy; <img src="{{ url_for('static', filename='images/NTO.png') }}" alt="Logo" style="height:45px;">
         </span>
     </nav>
     {% block addition %}
